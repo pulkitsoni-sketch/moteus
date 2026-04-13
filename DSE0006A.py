@@ -25,7 +25,7 @@ with BuildPart() as part:
     ]
 
     for lx, lz in left_corners:
-        sk = Plane(origin=(0, 0.102, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))
+        sk = Plane(origin=(0, 0.102-0.08, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))
         with BuildSketch(sk):
             with BuildLine():
                 Line((lx, lz), (lx, lz - 0.35))
@@ -45,7 +45,7 @@ with BuildPart() as part:
         extrude(amount=0.127)
 
     # 5-point profile in XZ plane at Y=0.102, subtract then add
-    sk3 = Plane(origin=(0, 0.102, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))
+    sk3 = Plane(origin=(0, 0.102-0.08, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))
     with BuildSketch(sk3):
         with BuildLine():
             Line((0.375, -0.3), (0.375, -0.75))
