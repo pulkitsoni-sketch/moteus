@@ -200,7 +200,7 @@ with BuildPart() as part:
             Circle(radius=0.45)
     extrude(amount=-3.4, mode=Mode.SUBTRACT)
 
-    # -X side: Loft circle 1→2
+    # -X side: Loft circle 1->2
     with BuildSketch(Plane(origin=(0, -2.0, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))):
         with Locations([(-5.5, 0.0)]):
             Circle(radius=0.3695)
@@ -209,7 +209,7 @@ with BuildPart() as part:
             Circle(radius=0.45)
     loft()
 
-    # -X side: Loft circle 2→3
+    # -X side: Loft circle 2->3
     with BuildSketch(Plane(origin=(0, -1.7, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))):
         with Locations([(-5.5, 0.0)]):
             Circle(radius=0.45)
@@ -218,7 +218,7 @@ with BuildPart() as part:
             Circle(radius=0.45)
     loft()
 
-    # -X side: Loft circle 3→4
+    # -X side: Loft circle 3->4
     with BuildSketch(Plane(origin=(0, 3.45, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))):
         with Locations([(-5.5, 0.0)]):
             Circle(radius=0.45)
@@ -295,7 +295,7 @@ with BuildPart() as part:
             Circle(radius=0.45)
     extrude(amount=-3.4, mode=Mode.SUBTRACT)
 
-    # +X side: Loft circle 1→2
+    # +X side: Loft circle 1->2
     with BuildSketch(Plane(origin=(0, -2.0, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))):
         with Locations([(5.5, 0.0)]):
             Circle(radius=0.3695)
@@ -304,7 +304,7 @@ with BuildPart() as part:
             Circle(radius=0.45)
     loft()
 
-    # +X side: Loft circle 2→3
+    # +X side: Loft circle 2->3
     with BuildSketch(Plane(origin=(0, -1.7, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))):
         with Locations([(5.5, 0.0)]):
             Circle(radius=0.45)
@@ -313,7 +313,7 @@ with BuildPart() as part:
             Circle(radius=0.45)
     loft()
 
-    # +X side: Loft circle 3→4
+    # +X side: Loft circle 3->4
     with BuildSketch(Plane(origin=(0, 3.45, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))):
         with Locations([(5.5, 0.0)]):
             Circle(radius=0.45)
@@ -387,8 +387,8 @@ with BuildPart() as part:
     # -X side: Cross profile at Z=2.05, subtract
     with BuildSketch(Plane.XY.offset(2.05)):
         with BuildLine():
-            RadiusArc((-2.359, 3.54), (-2.641, 3.54), -0.99) #outer circle
-            RadiusArc((-2.641, 3.54), (-2.55, 3.461), 0.09) #smaller arcs
+            RadiusArc((-2.359, 3.54), (-2.641, 3.54), -0.99)
+            RadiusArc((-2.641, 3.54), (-2.55, 3.461), 0.09)
             Line((-2.55, 3.461), (-2.55, 2.6))
             Line((-2.55, 2.6), (-3.411, 2.6))
             RadiusArc((-3.411, 2.6), (-3.49, 2.691), 0.09)
@@ -413,8 +413,8 @@ with BuildPart() as part:
     # +X side: Cross profile at Z=2.05, subtract
     with BuildSketch(Plane.XY.offset(2.05)):
         with BuildLine():
-            RadiusArc((2.359, 3.54), (2.641, 3.54), 0.99) #outer circle
-            RadiusArc((2.641, 3.54), (2.55, 3.461), -0.09) #smaller arcs
+            RadiusArc((2.359, 3.54), (2.641, 3.54), 0.99)
+            RadiusArc((2.641, 3.54), (2.55, 3.461), -0.09)
             Line((2.55, 3.461), (2.55, 2.6))
             Line((2.55, 2.6), (3.411, 2.6))
             RadiusArc((3.411, 2.6), (3.49, 2.691), -0.09)
@@ -508,12 +508,99 @@ with BuildPart() as part:
         with Locations([(-2.50, 10.0)]):
             Circle(radius=0.616)
     loft()
-    
+
     # +X side: Circle at (2.50, 2.55, 6.05), dia 2.50, extrude +2.0
     with BuildSketch(Plane.XY.offset(6.05)):
         with Locations([(2.50, 2.55)]):
             Circle(radius=1.25)
-    extrude(amount=2.0) 
+    extrude(amount=2.0)
+
+    #import math
+    #with BuildSketch(Plane(origin=(2.5, 0, 0), x_dir=(0, 1, 0), z_dir=(0, 0, 1))):
+    #    with BuildLine():
+    #        # Local 2D coordinates (Y, Z)
+    #        p1_local = (3.8, 7.95)
+    #        p2_local = (3.8, 8.05)
+    #        p3_local = (3.7, 8.05)
+    #        p4_local = (3.7, 7.95) # Center of the arc
+    #        
+    #        # Connect p1 to p2, and p2 to p3 with straight lines
+    #        Line(p1_local, p2_local)
+    #        Line(p2_local, p3_local)
+    #        
+    #        # Connect p3 back to p1 with an inward arc centered at p4
+    #        # We calculate the 45-degree midpoint to ensure a flawless ThreePointArc
+    #        mid_y = p4_local[0] + 0.1 * math.cos(math.radians(45))
+    #        mid_z = p4_local[1] + 0.1 * math.sin(math.radians(45))
+    #        
+    #        ThreePointArc(p3_local, (mid_y, mid_z), p1_local)
+            
+    #    make_face()
+
+    # Define the 3D axis of revolution based on the sketched line points
+    # Point 1: (2.5, 2.55, 7.95), Point 2: (2.5, 2.55, 6.373)
+    # The direction vector points straight down the -Z axis (0, 0, -1)
+    #rev_axis = Axis(origin=(2.5, 2.55, 7.95), direction=(0, 0, -1))
+    
+    # Revolve the sketched profile around the axis
+    #revolve(axis=rev_axis, mode=Mode.SUBTRACT)
+
+    # +X side: Circle at (2.50, 2.55, 8.05), dia 2.0, extrude +0.95
+    with BuildSketch(Plane.XY.offset(8.05)):
+        with Locations([(2.50, 2.55)]):
+            Circle(radius=1.0)
+    extrude(amount=0.95)
+
+    # +X side: Fillet edge at Z=8.05
+    #fillet_edges_805 = [
+    #    e for e in part.edges()
+    #    if abs(e.center().Z - 8.05) < 0.02
+    #    and abs(e.center().X - 2.50) < 1.05
+    #    and abs(e.center().Y - 2.55) < 1.05
+    #]
+    # if fillet_edges_805:
+    #    fillet(fillet_edges_805, radius=0.1)
+
+    # +X side: Sweep 90 pipe bend
+    with BuildLine() as sweep_path:
+        ThreePointArc(
+            (2.50, 2.55, 9.0),
+            (2.50, 2.2571, 9.7071),
+            (2.50, 1.55, 10.0),
+        )
+    with BuildSketch(Plane(origin=(2.50, 2.55, 9.0), z_dir=(0, 0, 1))) as sweep_section:
+        Circle(radius=1.0)
+    sweep(sweep_section.sketch, path=sweep_path.wires()[0])
+
+    # +X side: Extrude from Y=0.1 to Y=1.55
+    with BuildSketch(Plane(origin=(0, 0.1, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))):
+        with Locations([(2.50, 10.0)]):
+            Circle(radius=1.0)
+    extrude(amount=-1.45)
+
+    # +X side: Loft Y=0.1 to Y=0.0
+    with BuildSketch(Plane(origin=(0, 0.1, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))):
+        with Locations([(2.50, 10.0)]):
+            Circle(radius=1.0)
+    with BuildSketch(Plane(origin=(0, 0.0, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))):
+        with Locations([(2.50, 10.0)]):
+            Circle(radius=0.9)
+    loft()
+
+    # +X side: Extrude dia 1.5 from Y=0.0 to Y=-1.5
+    with BuildSketch(Plane(origin=(0, 0.0, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))):
+        with Locations([(2.50, 10.0)]):
+            Circle(radius=0.75)
+    extrude(amount=1.5)
+
+    # +X side: Loft Y=-1.5 to Y=-2.0
+    with BuildSketch(Plane(origin=(0, -1.5, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))):
+        with Locations([(2.50, 10.0)]):
+            Circle(radius=0.75)
+    with BuildSketch(Plane(origin=(0, -2.0, 0), x_dir=(1, 0, 0), z_dir=(0, -1, 0))):
+        with Locations([(2.50, 10.0)]):
+            Circle(radius=0.616)
+    loft()
 
 from ocp_vscode import show
 show(part)
