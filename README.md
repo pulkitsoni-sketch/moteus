@@ -96,3 +96,4 @@ A validation script (`validate_moteus.py`) compares the rebuilt output models to
   • Sym (%)    = Sym Diff as % of original volume
   • '—' in Sym columns means the mesh is an open shell or trimesh is unavailable.
 ```
+Time Taken: 60h
